@@ -45,10 +45,11 @@ public class MainActivity extends Activity {
                 item = item.replace(" - ", " ");
                 item = item.concat(".pdf");
                 
-                Uri path = Uri.parse("android.resource://" + getPackageName() + "/assets/pdfs/" + item);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri path = Uri.parse("android.resource://" + getPackageName() + "/assets/pdfs/1-The-Morning-Breaks.pdf");
+                Intent intent  = new Intent(Intent.ACTION_VIEW);
                 intent.setDataAndType(path, "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         });
 	}

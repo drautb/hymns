@@ -5,10 +5,47 @@
     tools:context=".MainActivity" >
 
     <TextView
+        android:id="@+id/tv_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
-
+        android:layout_centerVertical="false"
+        android:text="@string/welcome_msg"
+        android:textSize="12pt" />
+    
+    <TextView
+        android:id="@+id/tv_instructions"
+        android:layout_below="@id/tv_welcome"
+       	android:layout_width="wrap_content"
+       	android:layout_height="wrap_content"
+       	android:layout_centerHorizontal="false"
+       	android:layout_centerVertical="false"
+       	android:padding="16dp"
+       	android:textSize="10pt"
+       	android:text="@string/instructions" />
+    
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_below="@id/tv_instructions"
+        android:layout_width="fill_parent"
+        android:layout_height="25pt"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:padding="8dp"
+        android:textSize="10pt"
+        android:hint="@string/search_hint" />
+    
+    <ListView
+        android:id="@+id/lv_hymn_list"
+       	android:layout_below="@id/et_search"
+       	android:layout_width="fill_parent"
+       	android:layout_height="fill_parent"
+       	android:layout_centerHorizontal="true"
+       	android:layout_centerVertical="true"
+       	android:layout_margin="16dp"
+       	android:textSize="10pt" />
+       	
+       	
 </RelativeLayout>

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -32,6 +34,14 @@ public class MainActivity extends Activity {
 		ListView listView = (ListView)findViewById(R.id.lv_hymn_list);
 
 		ArrayList<Hymn> hymns = loadHymns();
+		
+		// Sort hymns according to number
+		Collections.sort(hymns, new Comparator<Hymn>() {
+	        @Override public int compare(Hymn h1, Hymn h2) {
+	            return h1.number() - h2.number();
+	        }
+		});
+
 		
 		// First paramenter - Context
 		// Second parameter - Layout for the row

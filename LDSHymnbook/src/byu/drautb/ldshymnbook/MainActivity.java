@@ -1,11 +1,17 @@
 package byu.drautb.ldshymnbook;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,9 +51,14 @@ public class MainActivity extends Activity {
                 item = item.replace(" - ", " ");
                 item = item.concat(".pdf");
                 
-                Uri path = Uri.parse("android.resource://" + getPackageName() + "/assets/pdfs/1-The-Morning-Breaks.pdf");
+                // Show a brief popup of the select hymn name
+                Toast.makeText(getApplicationContext(), item, Toast.LENGTH_SHORT).show();
+                
+                // Get a publicly accesible (in terms of apps on the device) handle to the pdf file
+                File file = getPublicFile(item);
+
                 Intent intent  = new Intent(Intent.ACTION_VIEW);
-                intent.setDataAndType(path, "application/pdf");
+                intent.setDataAndType(Uri.fromFile(file), "application/pdf");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
@@ -59,6 +70,29 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
+	}
+
+	@SuppressWarnings("unused")
+	public File getPublicFile(String filename) {
+		File file = new File(getExternalFilesDir(null), filename);
+		
+		// If file is null, it means it doesn't already exist in local public storage,
+		// so we copy it over there.
+	    if (!file.exists()) {
+	        try {
+	            InputStream is = getResources().getAssets().open("pdfs/" + filename);
+	            OutputStream os = new FileOutputStream(file);
+	            byte[] data = new byte[is.available()];
+	            is.read(data);
+	            os.write(data);
+	            is.close();
+	            os.close();
+	        } catch (IOException e) {
+	            Log.w("ExternalStorage", "Error writing " + file, e);
+	        }
+	    }
+
+        return file;
 	}
 	
 	public ArrayList<Hymn> loadHymns() {
@@ -76,7 +110,7 @@ public class MainActivity extends Activity {
 		
 		for (String pdf : pdfs) {
 			int number = Integer.parseInt(pdf.substring(0, pdf.indexOf(' ')));
-			String name = pdf.substring(pdf.indexOf(' '), pdf.indexOf(".pdf"));
+			String name = pdf.substring(pdf.indexOf(' ') + 1, pdf.indexOf(".pdf"));
 			
 			hymns.add(new Hymn(number, name, pdf));				   
 		}

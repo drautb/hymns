@@ -13,12 +13,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -47,8 +50,18 @@ public class MainActivity extends Activity {
 		// Second parameter - Layout for the row
 		// Third parameter - ID of the TextView to which the data is written
 		// Forth - the Array of data
-		ArrayAdapter<Hymn> adapter = new ArrayAdapter<Hymn>(this, android.R.layout.simple_list_item_1, android.R.id.text1, hymns);
-
+		final ArrayAdapter<Hymn> adapter = new ArrayAdapter<Hymn>(this, android.R.layout.simple_list_item_1, android.R.id.text1, hymns);
+		
+		// Add listener to handle changes in the search text
+		final EditText etSearch = (EditText)findViewById(R.id.et_search);
+		etSearch.addTextChangedListener(new TextWatcher() {
+		    public void onTextChanged(CharSequence s, int start, int before, int count) {}
+		    public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+		    public void afterTextChanged(Editable s) {
+		        adapter.getFilter().filter(etSearch.getText().toString());
+		    }
+		});
+		
 		// Assign adapter to ListView
 		listView.setAdapter(adapter); 
 		

@@ -2,8 +2,8 @@
 <resources>
 
     <string name="app_name">LDS Hymnbook</string>
-    <string name="welcome_msg">Welcome to the LDS Hymnbook!</string>
-    <string name="instructions">Select a hymn from the list below to view it. You may narrow the list by entering a hymn number or part of a name in the search box.</string>
+    <string name="welcome_msg">LDS Music App</string>
+    <string name="instructions">Select a song from the list below to view it.</string>
     <string name="search_hint">Hymn # or name</string>
     <string name="menu_settings">Settings</string>
 

@@ -15,14 +15,14 @@
     
     <TextView
         android:id="@+id/tv_instructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_welcome"
-       	android:layout_width="wrap_content"
-       	android:layout_height="wrap_content"
-       	android:layout_centerHorizontal="false"
-       	android:layout_centerVertical="false"
-       	android:padding="16dp"
-       	android:textSize="10pt"
-       	android:text="@string/instructions" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="false"
+        android:padding="16dp"
+        android:text="@string/instructions"
+        android:textSize="10pt" />
     
     <EditText
         android:id="@+id/et_search"

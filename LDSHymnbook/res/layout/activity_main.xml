@@ -26,16 +26,17 @@
     
     <EditText
         android:id="@+id/et_search"
-        android:layout_below="@id/tv_instructions"
         android:layout_width="fill_parent"
         android:layout_height="25pt"
+        android:layout_below="@id/tv_instructions"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="false"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:hint="@string/search_hint"
         android:padding="8dp"
-        android:textSize="10pt"
-        android:hint="@string/search_hint" />
+        android:singleLine="true"
+        android:textSize="10pt" />
     
     <ListView
         android:id="@+id/lv_hymn_list"
